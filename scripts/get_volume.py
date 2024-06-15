@@ -3,8 +3,8 @@
 import sys
 import requests
 
-API_KEY = 'AIzaSyBJv9TW_gPGabwybg6ampfqlUBiS0VOJSI'
-SEARCH_ENGINE_ID = 'f7715df71e5bf4246'  # Puedes obtenerlo en la configuración de tu motor de búsqueda personalizado de Google
+API_KEY = 'AIzaSyBJv9TW_gPGabwybg6ampfqlUBiS0VOJSI' #  clave de la api de busqueda de google || obtenida desde mi cuenta personal
+SEARCH_ENGINE_ID = 'f7715df71e5bf4246'  #  clave de motor de busqueda de google || idem
 
 def get_search_volume(keyword):
     url = f'https://www.googleapis.com/customsearch/v1?key={API_KEY}&cx={SEARCH_ENGINE_ID}&q={keyword}'

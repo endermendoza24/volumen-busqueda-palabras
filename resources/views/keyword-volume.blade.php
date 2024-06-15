@@ -8,10 +8,10 @@
 <body>
     <h2>Obtener Volumen de Búsqueda</h2>
     <form id="keywordForm">
-        @csrf <!-- Agregar token CSRF -->
-        <label for="keyword">Palabra Clave:</label><br>
+        @csrf 
+        <label for="keyword">Palabra Clave a buscar:</label><br>
         <input type="text" id="keyword" name="keyword"><br><br>
-        <button type="submit">Obtener Volumen</button>
+        <button type="submit">Buscar</button>
     </form>
     <div id="result"></div>
 
@@ -27,7 +27,7 @@
                 },
                 data: { keyword: keyword },
                 success: function(response) {
-                    $('#result').html('Volumen de Búsqueda: ' + response.volume);
+                    $('#result').html('Hay : ' + response.volume + ' búsquedas de esta palabra en Google'); //  mejorar este diseno
                 },
                 error: function(xhr) {
                     $('#result').html('Error: ' + xhr.responseJSON.error);
