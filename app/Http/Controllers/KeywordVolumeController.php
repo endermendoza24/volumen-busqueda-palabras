@@ -27,13 +27,11 @@ class KeywordVolumeController extends Controller
             exec($command, $output, $returnCode);
 
             if ($returnCode !== 0) {
-                // Error al ejecutar el comando
+               
                 return response()->json(['error' => 'Error al ejecutar el script de Python'], 500);
             }
 
-            // El resultado del script se encuentra en $output, si es necesario
-
-            // Ejemplo de cómo manejar el resultado si es JSON
+            
             $result = json_decode(implode("\n", $output), true);
             return response()->json(['volume' => $result]);
         } catch (\Exception $e) {
