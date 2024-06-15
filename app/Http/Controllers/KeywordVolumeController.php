@@ -11,27 +11,30 @@ class KeywordVolumeController extends Controller
         return view('keyword-volume');
     }
 
-    public function getVolume(Request $request)
+    public function obtenerVolumen(Request $request)
     {
-        $keyword = $request->input('keyword');
+        $validator = Validator::make($request->all(), [
+            'keyword' => 'required|string|max:255' //  Limite a la palabra clave
+        ]);
 
-        // Validación básica
-        if (!$keyword) {
-            return response()->json(['error' => 'La palabra clave no puede estar vacía'], 422);
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()->first()], 422);
         }
+
+        $keyword = $request->input('keyword');
+        $apiKey = env('GOOGLE_CUSTOM_SEARCH_API_KEY'); //  Variable de entorno, del api key de Google
+        $searchEngineId = env('GOOGLE_SEARCH_ENGINE_ID');
 
         try {
             $scriptPath = base_path('scripts/get_volume.py');
-            $command = "python {$scriptPath} {$keyword}";
+            $command = escapeshellcmd("python {$scriptPath} " . escapeshellarg($keyword) . " " . escapeshellarg($apiKey) . " " . escapeshellarg($searchEngineId));
 
             exec($command, $output, $returnCode);
 
             if ($returnCode !== 0) {
-               
                 return response()->json(['error' => 'Error al ejecutar el script de Python'], 500);
             }
 
-            
             $result = json_decode(implode("\n", $output), true);
             return response()->json(['volume' => $result]);
         } catch (\Exception $e) {

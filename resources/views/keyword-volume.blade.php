@@ -42,7 +42,7 @@
             max-height: 200px;
             overflow-y: auto;
             z-index: 1000;
-            display: none; /* Inicialmente oculto */
+            display: none; /*  inicialmente oculto */
         }
         .lista-sugrencias li {
             padding: 10px;
@@ -79,7 +79,7 @@
             $('#palabra').on('input', function() {
                 var palabra = $(this).val().trim();
                 if (palabra === '') {
-                    $('#listaSugerencias').hide(); // Oculta la lista de sugerencias si el campo está vacío
+                    $('#listaSugerencias').hide(); //  Oculta la lista de sugerencias si el campo está vacío
                     return;
                 }
 
@@ -99,7 +99,7 @@
                             html += '<li>' + suggestion + '</li>';
                         });
 
-                        $('#listaSugerencias').html(html).show(); // Muestra la lista de sugerencias
+                        $('#listaSugerencias').html(html).show(); //  Muestra la lista de sugerencias
                     },
                     error: function(xhr, status, error) {
                         console.error('Error: ', error);
@@ -107,28 +107,27 @@
                 });
             });
 
-            // Manejar clic en sugerencias
             $('#listaSugerencias').on('click', 'li', function() {
                 var selectedKeyword = $(this).text();
                 $('#palabra').val(selectedKeyword);
-                $('#listaSugerencias').hide(); // Oculta la lista de sugerencias después de seleccionar una opción
+                $('#listaSugerencias').hide(); //  Oculta la lista de sugerencias después de seleccionar una opción
             });
 
-            // Manejar clic fuera de la lista de sugerencias
+            
             $(document).on('click', function(e) {
                 if (!$(e.target).closest('#listaSugerencias').length && !$(e.target).is('#palabra')) {
                     $('#listaSugerencias').hide(); // Ocultar el cuadro de sugerencias
                 }
             });
 
-            // Manejar clic en el botón de limpiar
+            //  Manejar clic en el botón de limpiar
             $('#limpiarPalabra').on('click', function() {
                 $('#palabra').val(''); // Limpiar el campo de búsqueda
                 $('#result').empty().hide(); // Limpiar y ocultar el resultado
                 $('#listaSugerencias').hide(); // Ocultar la lista de sugerencias
             });
 
-            // Manejar envío del formulario
+            //  Manejar envío del formulario
             $('#keywordForm').submit(function(event) {
                 event.preventDefault();
                 var palabra = $('#palabra').val().trim();
