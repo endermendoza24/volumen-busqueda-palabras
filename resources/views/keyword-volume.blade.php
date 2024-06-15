@@ -36,6 +36,7 @@
                 <input type="text" class="form-control" id="keyword" name="keyword" placeholder="Ingrese palabra clave">
             </div>
             <button type="submit" class="btn btn-success mb-2 ml-2">Buscar</button>
+            <button type="button" id="clearButton" class="btn btn-danger mb-2 ml-2">Limpiar</button>
         </form>
         <div id="result" class="result-box"></div>
     </div>
@@ -58,6 +59,11 @@
                     $('#result').html('<p class="text-danger">Error: ' + xhr.responseJSON.error + '</p>');
                 }
             });
+        });
+
+        $('#clearButton').click(function() {
+            $('#keyword').val('');
+            $('#result').html('');
         });
     </script>
 </body>
