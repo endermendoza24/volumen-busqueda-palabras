@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Búsqueda Sugerida - Google</title>
+    <title>Volumen búsqueda palabra</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
@@ -64,11 +64,11 @@
         <form id="keywordForm" class="form-inline justify-content-center">
             <div class="form-group mb-2">
                 <label for="palabra" class="sr-only">Palabra clave a buscar:</label>
-                <input type="text" class="form-control" id="palabra" name="palabra" placeholder="Ingrese palabra clave">
+                <input type="text" class="form-control" id="palabra" name="palabra" placeholder="Ingrese palabra clave" title="Ingrese una palabra clave para buscar su volumen de búsqueda en Google">
                 <ul class="lista-sugrencias" id="listaSugerencias"></ul>
             </div>
-            <button type="submit" class="btn btn-success mb-2 ml-2">Buscar</button>
-            <button type="button" id="limpiarPalabra" class="btn btn-danger mb-2 ml-2">Limpiar</button>
+            <button type="submit" class="btn btn-success mb-2 ml-2" title="Buscar la cantidad de veces que se ha buscado esa palabra en Google">Buscar</button>
+            <button type="button" id="limpiarPalabra" class="btn btn-danger mb-2 ml-2" title="Limpiar cuadro de búsqueda, y cuadro de resultados">Limpiar</button>
         </form>
         <div id="result"></div>
     </div>
