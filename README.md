@@ -1,66 +1,84 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Volumen de Búsqueda de Palabras en Google
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Este proyecto es una aplicación web para obtener el volumen de búsquedas de una palabra clave en Google utilizando la API de búsqueda personalizada de Google.
+El procesamiento de la solicitud y la obtención de datos de la API se realiza en un script de Python, mientras que la interfaz de usuario y la ejecución del script son manejadas por Laravel y jQuery.
 
-## About Laravel
+## Descripción
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+El sistema permite a los usuarios ingresar una palabra clave y obtener el número de resultados de búsqueda relacionados con esa palabra en Google. Incluye sugerencias automáticas de búsqueda a medida que el usuario escribe utilizando Jquery.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Componentes
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Frontend
 
-## Learning Laravel
+-   **Formulario de Búsqueda**: Permite al usuario ingresar una palabra clave.
+-   **Sugerencias de Búsqueda**: Utiliza la API de sugerencias de Google para mostrar sugerencias en tiempo real.
+-   **Resultados**: Muestra el volumen de búsquedas para la palabra clave ingresada.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Backend (Laravel)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+-   **Rutas**:
+    -   `/`: Endpoint para obtener el volumen de búsqueda, que se encuentra en la vista principal.
+-   **Controlador**: `KeywordVolumeController` maneja las solicitudes desde el frontend.
+    -   `index()`: Devuelve la vista principal.
+    -   `obtenerVolumen()`: Recibe la palabra clave, ejecuta el script de Python y retorna el volumen de búsqueda en formato JSON.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Script de Python
 
-## Laravel Sponsors
+-   **`get_volume.py`**: Script que utiliza la API de búsqueda personalizada de Google para obtener el número total de resultados de búsqueda para una palabra clave dada.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## Instalación
 
-### Premium Partners
+### Requisitos Previos
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+-   PHP
+-   Composer
+-   Python
+-   Laravel
 
-## Contributing
+### Pasos de Instalación
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+1. Clona el repositorio:
 
-## Code of Conduct
+    ```bash
+    git clone https://github.com/endermendoza24/volumen-busqueda-palabras.git
+    ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+2. Navega al directorio del proyecto:
 
-## Security Vulnerabilities
+    ```bash
+    cd repositorio-recien-descargado
+    ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+3. Instala las dependencias de PHP:
 
-## License
+    ````bash
+    composer install
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+    Actualiza las siguientes variables en el archivo `.env`:
+    ```env
+    GOOGLE_CUSTOM_SEARCH_API_KEY=TU_API_KEY
+    GOOGLE_CUSTOM_SEARCH_ENGINE_ID=TU_SEARCH_ENGINE_ID
+
+    ````
+
+4. Configura tu base de datos en el archivo `.env` y luego ejecuta las migraciones:
+
+    ```bash
+    php artisan migrate
+    ```
+
+5. Ejecuta el servidor de desarrollo de Laravel:
+
+    ```bash
+    php artisan serve
+    ```
+
+6. Navega a `http://localhost:8000` en tu navegador.
+
+## Uso
+
+1. Ingresa una palabra clave en el campo de búsqueda.
+2. Selecciona una sugerencia de la lista (opcional).
+3. Haz clic en el botón "Buscar".
+4. El sistema mostrará el volumen de búsquedas para la palabra clave ingresada.
